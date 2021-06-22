@@ -64,18 +64,18 @@ class Optimasi extends CI_Controller {
 
 		/*data array allele*/
 		$dat = array(
-			'a' => $input1[$random_keys1],
-			'b' => $input2[$random_keys2],
-			'c' => $input3[$random_keys3],
-			'd' => $input4[$random_keys4],
-			'e' => $input5[$random_keys5],
-			'f' => $input6[$random_keys6],
-			'g' => $input7[$random_keys7],
-			'h' => $input8[$random_keys8],
-			'i' => $input9[$random_keys9],
-			'j' => $input10[$random_keys10],
-			'k' => $input11[$random_keys11],
-			'l' => $input12[$random_keys12]
+			'1' => $input1[$random_keys1],
+			'2' => $input2[$random_keys2],
+			'3' => $input3[$random_keys3],
+			'4' => $input4[$random_keys4],
+			'5' => $input5[$random_keys5],
+			'6' => $input6[$random_keys6],
+			'7' => $input7[$random_keys7],
+			'8' => $input8[$random_keys8],
+			'9' => $input9[$random_keys9],
+			'10' => $input10[$random_keys10],
+			'11' => $input11[$random_keys11],
+			'12' => $input12[$random_keys12]
 		);
 		$data['data'] = $dat;
 
@@ -85,7 +85,7 @@ class Optimasi extends CI_Controller {
 	public function index()
 	{
 		
-		/*$data = $this->rand();*/
+		// $data = $this->rand();
 		$data['keb']=$this->M_kebutuhan->kebutuhan();
 		$data['bmt']=$this->M_bmt->bmt();
 		// $data = $this->rand();
@@ -94,9 +94,9 @@ class Optimasi extends CI_Controller {
 		/*$data['bmt2']=$this->M_bmt->bmt2();*/
 
 		/*$datab = $this->rand();*/
-		/*echo "<pre/>";
-		var_dump($datab, $data);
-		die();*/
+		// echo "<pre/>";
+		// var_dump($data);
+		// die();
 		$this->load->view('admin/optimasi/optimasi_input', $data);
 
 	}
@@ -113,22 +113,30 @@ class Optimasi extends CI_Controller {
 	}*/
 
 	public function optimasi(){
-		global $hasila;
 		$idusia=$this->input->post('usia');
 		$data['umur']=$this->M_optimasi->getKebWhereId($idusia);
-
+		$inputtes = $this->echo_hasil();
+		$arrayid = [];
+		for ($i=1; $i <= 12; $i++) { 
+			for ($j=1; $j <= 12 ; $j++) { 
+				array_push($arrayid, $inputtes[$i]['data'][$j]['id']);
+			}
+		}
+		// echo "<pre/>";
+		// var_dump($this->input->post('jmlingin'));
+		// die();
+		// echo "<pre/>";
+		// var_dump($arrayid);
+		// die();
 		$dat=$this->input->post('pilihbmt');
 		$data['pilihan'] = $this->M_optimasi->getKanWhereId($dat);
-		$data['jmlada']  = count(array_count_values($this->echo_hasil()));
-		// echo "<pre/>";
-		// var_dump($this->echo_hasil());
-		// die();
+		$data['jmlada']  = count(array_count_values($arrayid));
 		$data['jmlingin']=$this->input->post('jmlingin');
 		$data['pcr']=$this->input->post('pcr');
 		$data['pmt']=$this->input->post('pmt');
 
 		//fungsikombinasi=jumlahkromosom
-		$n=count(array_count_values($this->input->post('pilihbmt')));
+		$n=count(array_count_values($arrayid));
 		$nfak = $this->faktorial($n);
 		$r=$this->input->post('jmlingin');
 		$rfak = $this->faktorial($r);

@@ -111,9 +111,9 @@
                         <?php } ?>
                   </select>
                   </div> -->
-                  <!-- <div class="form-group"> -->
-                   <!--  <label>Tentukan Sub Jenis Pkerjaan</label> -->
-                    <!-- <?php foreach($data as $d) : ?>
+                  <!-- <div class="form-group">
+                    <label>Tentukan Sub Jenis Pkerjaan</label>
+                    <?php foreach($data as $d) : ?>
                     <input class="text-primary" multiple="multiple" type="text" name="pilihbmt[]" class="form-control" value="<?= $d['id']; ?>">
                   <?php endforeach; ?>
                   </div> -->
